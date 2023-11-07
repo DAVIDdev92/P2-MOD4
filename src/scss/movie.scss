@@ -1,0 +1,168 @@
+.movie-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  padding: 30px;
+  min-height: 100vh;
+  max-width: 100%;
+  flex-wrap: wrap;
+  padding: 5rem;
+  gap: 1.5rem;
+}
+
+.movie {
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  max-width: 20%;
+}
+
+.movie-poster {
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.movie-title {
+  margin-bottom: 2px;
+  font-size: 2em;
+  font-weight: bold;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap;
+}
+
+.movie-data {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.movie-description-heading {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.movie-description {
+  margin: 6px 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.movie-other {
+  line-height: 1.4;
+  padding: 5px 0;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.movie-other:last-child {
+  border: none;
+}
+
+.movie-other span {
+  font-weight: bold;
+  padding-right: 5px;
+}
+
+
+.list-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px auto;
+  width: 90%;
+
+}
+
+.header, .list-container > article {
+  grid-column: 1/2;
+  display: grid;
+  grid-template-columns: 1fr 1fr 5fr 2fr 2fr 2fr;
+  width: 100%;
+  gap: 2rem;
+
+}
+
+
+.header-item-center{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  
+}
+
+.header-item-title {
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  gap: 0.12rem;
+}
+
+.title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.title > a {
+  color: #fff;
+  font-weight:600;
+}
+
+.list-container > article {
+  padding-block: 1rem;
+}
+
+.list-container > article, .header {
+  border-block-end: 1px solid #fff;
+}
+
+.foto {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.foto > img {
+  width: 70%;
+}
+
+.yellow-star {
+  fill: #e6e604;
+}
+
+.empty-star {
+  fill: #fff;
+}
+
+nav > ul {
+  display: flex;
+  gap: 2rem;
+}
+
+nav > ul > li {
+  text-decoration: none;
+  list-style: none;
+  
+}
+
+nav > ul > li > .button {
+  background: gray;
+  border: none;
+  color: #000;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0.5rem 5rem;
+  margin: 4rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 500ms, color 500ms;
+}
+
+nav > ul > li > .button:hover {
+  background: rgb(78, 78, 78);
+  color: #fff;
+} 
