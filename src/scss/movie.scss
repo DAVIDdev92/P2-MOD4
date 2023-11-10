@@ -1,3 +1,4 @@
+
 .movie-container {
   display: flex;
   justify-content: center;
@@ -8,7 +9,7 @@
   max-width: 100%;
   flex-wrap: wrap;
   padding: 5rem;
-  gap: 1.5rem;
+  gap: 2.5rem;
 }
 
 .movie {
@@ -16,6 +17,7 @@
   display: flex;
   flex-direction: column;
   max-width: 20%;
+  cursor:pointer;
 }
 
 .movie-poster {
@@ -153,12 +155,13 @@ nav > ul > li {
 
 nav > ul > li > .button {
   background: gray;
+  
   border: none;
   color: #000;
   font-weight: 600;
   text-transform: uppercase;
   padding: 0.5rem 5rem;
-  margin: 0rem 1rem 0rem 1rem;
+  margin: 0rem 0.6rem 0rem 0.6rem;
   border-radius: 5px;
   cursor: pointer;
   transition: background 500ms, color 500ms;
@@ -184,6 +187,18 @@ nav > ul > li > .button:hover {
   gap: 4rem;
   margin: 1rem 0rem 4rem 0rem;
 }
+
+
+.select-areas > #category, .select-areas > #order, .select-areas > .search > input  {
+  padding: 0.3rem;
+  background: #ebebeb;
+  color:#000;
+  font-weight: 600;
+  border: 1px solid gray;
+  border-radius: 5px;
+  
+}
+
 
 
 

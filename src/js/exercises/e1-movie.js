@@ -2,6 +2,7 @@ import { movies } from "../data/movies";
 import { getMoviePosterUrl } from "../utils/movie-utils";
 import { createMovieList } from "../practice/practice1";
 import { categories } from "../data/movie-categories";
+import { filterMovies } from "../utils/filterMovies";
 
 function createSortContainer() {
   const element = document.createElement("div");
@@ -54,6 +55,8 @@ function createSelect(text) {
   }
 }
 
+
+
 function createSearchElement() {
   const element = document.createElement("search");
   element.className = "search";
@@ -61,7 +64,7 @@ function createSearchElement() {
   element2.type = "text";
   element2.id = "search";
   element2.name = "search";
-  element2.placeholder = "Title,Actor,Director,Year,...";
+  element2.placeholder = "Title,Actor,...";
   element.appendChild(element2);
   return element;
 }
@@ -108,6 +111,10 @@ function createButtonElement(content) {
 }
 
 document.querySelector("#root").appendChild(createSortContainer());
+
+document.querySelector("#category").addEventListener("input", filterMovies);
+document.querySelector("#order").addEventListener("input", filterMovies);
+document.querySelector("#search").addEventListener("input", filterMovies);
 
 document.querySelector("#root").appendChild(createNavElement());
 
