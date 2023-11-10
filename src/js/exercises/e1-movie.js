@@ -1,8 +1,80 @@
 import { movies } from "../data/movies";
 import { getMoviePosterUrl } from "../utils/movie-utils";
 import { createMovieList } from "../practice/practice1";
+import { categories } from "../data/movie-categories";
 
+function createSortContainer() {
+  const element = document.createElement("div");
+  element.className = "sort-container";
+  element.appendChild(createTitleSortContainer("title-sort-container"));
+  element.appendChild(createSelectAreas("select-areas"));
 
+  return element;
+}
+
+function createTitleSortContainer() {
+  const element = document.createElement("h2");
+  element.className = "title-sort-container";
+  element.textContent = "Sort by:";
+
+  return element;
+}
+
+function createSelect(text) {
+  const element = document.createElement("select");
+  element.id = text;
+  element.name = text;
+
+  if (text === "category") {
+    let myArray = Object.values(categories);
+    for (let i = 0; i < myArray.length; i++) {
+      const element2 = document.createElement("option");
+      element2.value = myArray[i].toLowerCase();
+      element2.textContent = myArray[i];
+      element.appendChild(element2);
+    }
+
+    return element;
+  } else if (text === "order") {
+    let myArray2 = [
+      "Title-Asc",
+      "Title-Desc",
+      "Director-asc",
+      "Director-desc",
+      "Year-asc",
+      "Year-desc",
+    ];
+    for (let i = 0; i < myArray2.length; i++) {
+      const element2 = document.createElement("option");
+      element2.value = myArray2[i].toLowerCase();
+      element2.textContent = myArray2[i];
+      element.appendChild(element2);
+    }
+    return element;
+  }
+}
+
+function createSearchElement() {
+  const element = document.createElement("search");
+  element.className = "search";
+  const element2 = document.createElement("input");
+  element2.type = "text";
+  element2.id = "search";
+  element2.name = "search";
+  element2.placeholder = "Title,Actor,Director,Year,...";
+  element.appendChild(element2);
+  return element;
+}
+
+function createSelectAreas() {
+  const element = document.createElement("div");
+  element.className = "select-areas";
+  element.appendChild(createSelect("category"));
+  element.appendChild(createSelect("order"));
+  element.appendChild(createSearchElement());
+
+  return element;
+}
 
 function createNavElement() {
   const element = document.createElement("nav");
@@ -31,9 +103,11 @@ function createButtonElement(content) {
   element.id = content;
   let a = content.charAt(0).toUpperCase() + content.slice(1);
   element.textContent = a;
-  
+
   return element;
 }
+
+document.querySelector("#root").appendChild(createSortContainer());
 
 document.querySelector("#root").appendChild(createNavElement());
 
@@ -108,12 +182,11 @@ for (let i = 0; i < movies.length; i++) {
 document.querySelector("#root").appendChild(movieContainer);
 
 function showGrid() {
-    if (document.querySelector(".list-container") !== null) {
-        document.querySelector(".list-container").remove();
-      }else {
-        document.querySelector(".movie-container").remove();
-      }
-  
+  if (document.querySelector(".list-container") !== null) {
+    document.querySelector(".list-container").remove();
+  } else {
+    document.querySelector(".movie-container").remove();
+  }
 
   const movieContainer = document.createElement("div");
   movieContainer.className = "movie-container";
@@ -134,6 +207,5 @@ function showList() {
     document.querySelector(".list-container").remove();
   }
 
-  
   document.querySelector("#root").appendChild(createMovieList());
 }
