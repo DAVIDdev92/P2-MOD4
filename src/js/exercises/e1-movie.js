@@ -9,6 +9,7 @@ function createSortContainer() {
   element.className = "sort-container";
   element.appendChild(createTitleSortContainer("title-sort-container"));
   element.appendChild(createSelectAreas("select-areas"));
+  element.appendChild(createResultElement(0));
 
   return element;
 }
@@ -16,7 +17,7 @@ function createSortContainer() {
 function createTitleSortContainer() {
   const element = document.createElement("h2");
   element.className = "title-sort-container";
-  element.textContent = "Sort by:";
+  element.textContent = "Movie Searcher";
 
   return element;
 }
@@ -28,6 +29,14 @@ function createSelect(text) {
 
   if (text === "category") {
     let myArray = Object.values(categories);
+
+    const element3 = document.createElement("option");
+    element3.setAttribute("disabled", true);
+    element3.setAttribute("selected", true);
+    element3.value = "";
+    element3.textContent = "Select category";
+    element.appendChild(element3);
+
     for (let i = 0; i < myArray.length; i++) {
       const element2 = document.createElement("option");
       element2.value = myArray[i].toLowerCase();
@@ -45,6 +54,12 @@ function createSelect(text) {
       "Year-asc",
       "Year-desc",
     ];
+    const element3 = document.createElement("option");
+    element3.setAttribute("disabled", true);
+    element3.setAttribute("selected", true);
+    element3.value = "";
+    element3.textContent = "Select order";
+    element.appendChild(element3);
     for (let i = 0; i < myArray2.length; i++) {
       const element2 = document.createElement("option");
       element2.value = myArray2[i].toLowerCase();
@@ -54,8 +69,6 @@ function createSelect(text) {
     return element;
   }
 }
-
-
 
 function createSearchElement() {
   const element = document.createElement("search");
@@ -69,13 +82,23 @@ function createSearchElement() {
   return element;
 }
 
+function createResetElement() {
+  const element = document.createElement("input");
+  element.className = "reset";
+  element.type = "reset";
+  element.id = "reset";
+  element.textContent = "Reset";
+
+  return element;
+}
+
 function createSelectAreas() {
-  const element = document.createElement("div");
+  const element = document.createElement("form");
   element.className = "select-areas";
   element.appendChild(createSelect("category"));
   element.appendChild(createSelect("order"));
   element.appendChild(createSearchElement());
-
+  element.appendChild(createResetElement("reset"));
   return element;
 }
 
@@ -110,11 +133,21 @@ function createButtonElement(content) {
   return element;
 }
 
+export function createResultElement(totalFilms) {
+  const element = document.createElement("p");
+  element.style.display = "none";
+  element.id = "result-films";
+  element.textContent = ``;
+
+  return element;
+}
+
 document.querySelector("#root").appendChild(createSortContainer());
 
 document.querySelector("#category").addEventListener("input", filterMovies);
 document.querySelector("#order").addEventListener("input", filterMovies);
 document.querySelector("#search").addEventListener("input", filterMovies);
+document.querySelector("#reset").addEventListener("click", showGrid);
 
 document.querySelector("#root").appendChild(createNavElement());
 
@@ -165,7 +198,7 @@ function createCategoryElement(category) {
 }
 
 // TO BE COMPLETED (Add description, director, etc.)
-function createMovieElement(movieObj) {
+export function createMovieElement(movieObj) {
   const movieElement = document.createElement("div");
   movieElement.className = "movie";
   movieElement.appendChild(createPosterElement(movieObj.poster));
@@ -189,6 +222,9 @@ for (let i = 0; i < movies.length; i++) {
 document.querySelector("#root").appendChild(movieContainer);
 
 function showGrid() {
+  let g = document.querySelector("#result-films");
+  g.style.display = "none";
+  g.textContent = ``;
   if (document.querySelector(".list-container") !== null) {
     document.querySelector(".list-container").remove();
   } else {
