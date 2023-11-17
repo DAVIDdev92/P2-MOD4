@@ -1,6 +1,7 @@
 import { movies } from "../data/movies";
 import { categories } from "../data/movie-categories";
 import { createMovieElement, createResultElement } from "../exercises/e1-movie";
+
 function showFilteredMovies() {}
 let timeOutId;
 

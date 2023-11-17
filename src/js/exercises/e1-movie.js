@@ -1,9 +1,13 @@
-import { movies } from "../data/movies";
+// import { movies } from "../data/movies";
 import { getMoviePosterUrl } from "../utils/movie-utils";
 import { createMovieList } from "../practice/practice1";
 import { categories } from "../data/movie-categories";
 import { filterMovies } from "../utils/filterMovies";
+import { movieLoading } from "../utils/movies-API";
 
+const movies = await movieLoading();
+
+console.log(movies)
 function createSortContainer() {
   const element = document.createElement("div");
   element.className = "sort-container";
@@ -252,3 +256,4 @@ function showList() {
 
   document.querySelector("#root").appendChild(createMovieList());
 }
+
