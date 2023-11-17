@@ -4,6 +4,7 @@ import { createMovieList } from "../practice/practice1";
 import { categories } from "../data/movie-categories";
 import { filterMovies } from "../utils/filterMovies";
 import { movieLoading } from "../utils/movies-API";
+import { showMovie } from "../utils/movie-info";
 
 const movies = await movieLoading();
 
@@ -202,9 +203,10 @@ function createCategoryElement(category) {
 }
 
 // TO BE COMPLETED (Add description, director, etc.)
-export function createMovieElement(movieObj) {
+export function createMovieElement(movieObj, ox) {
   const movieElement = document.createElement("div");
   movieElement.className = "movie";
+  movieElement.id = ox;
   movieElement.appendChild(createPosterElement(movieObj.poster));
   movieElement.appendChild(createTitleElement(movieObj.title));
   movieElement.appendChild(createDataElement(movieObj.rating, movieObj.year));
@@ -216,10 +218,11 @@ export function createMovieElement(movieObj) {
 
 const movieContainer = document.createElement("div");
 movieContainer.className = "movie-container";
+movieContainer.addEventListener('click', showMovie)
 
 for (let i = 0; i < movies.length; i++) {
   const movie = movies[i];
-  const movieElement = createMovieElement(movie);
+  const movieElement = createMovieElement(movie, i);
   movieContainer.appendChild(movieElement);
 }
 
@@ -237,10 +240,11 @@ function showGrid() {
 
   const movieContainer = document.createElement("div");
   movieContainer.className = "movie-container";
+  movieContainer.addEventListener('click', showMovie)
 
   for (let i = 0; i < movies.length; i++) {
     const movie = movies[i];
-    const movieElement = createMovieElement(movie);
+    const movieElement = createMovieElement(movie, i);
     movieContainer.appendChild(movieElement);
   }
 
