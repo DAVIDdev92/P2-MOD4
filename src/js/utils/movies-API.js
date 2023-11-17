@@ -16,7 +16,7 @@ export const movieLoading = async () => {
       const json = await response.json();
 
       const movies = await json.results;
-      console.log("fech 1 movies results", movies);
+      
 
       const arrayMoviesPromises = movies.map(async (film) => {
         let idMovie = film.id;
@@ -24,13 +24,16 @@ export const movieLoading = async () => {
         let detailsInfoNeed = await getMovieDetails(idMovie);
         let crewCast = await getMovieCredits(idMovie);
         let recommendations = await getMovieRecommendations(idMovie);
-        console.log(recommendations);
+      
+        function director() {
+          return crewCast.crew.find(a=> a.department == "Directing").name
+        } 
 
         return {
           id: film.id,
           poster: film.poster_path,
           title: film.title,
-          director: film.director,
+          director: director(),
           actors: film.actors,
           year: film.release_date.split("-")[0],
           description: film.overview,
@@ -54,7 +57,7 @@ export const movieLoading = async () => {
       });
 
       const arrayMovies = await Promise.all(arrayMoviesPromises);
-      console.log("arrayMovies", arrayMovies);
+      
 
       return arrayMovies;
     } else if (response.status === 404) {
@@ -65,7 +68,7 @@ export const movieLoading = async () => {
       throw Error("Unknown error");
     }
   } catch (Error) {
-    console.log(Error);
+    
   }
 };
 
@@ -81,7 +84,7 @@ async function getMovieDetails(idMovie) {
 
     return json.genres;
   } catch (error) {
-    console.log(error);
+    
   }
 }
 
@@ -97,7 +100,7 @@ async function getMovieCredits(idMovie) {
 
     return json;
   } catch (error) {
-    console.log(error);
+    
   }
 }
 
@@ -110,9 +113,9 @@ async function getMovieRecommendations(idMovie) {
       throw Error(response.statusText);
     }
     const json = await response.json();
-    console.log(json);
+    
     return json;
   } catch (error) {
-    console.log(error);
+    
   }
 }
